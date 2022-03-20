@@ -6,7 +6,7 @@ import { usersFetchFailure, usersFetchSuccess } from '../../reducers/usersReduce
 import { UsersActions } from '../../reducers/usersReducer/usersTypes';
 
 
-function* fetchUsers() {
+export function* fetchUsers() {
   try {
     const data: IUser[] = yield call(getUsers);
 
@@ -14,6 +14,8 @@ function* fetchUsers() {
   } catch (err) {
     if (err instanceof Error) {
       yield put(usersFetchFailure(err.message));
+    } else {
+      yield put(usersFetchFailure('Something went wrong!'));
     }
   }
 }
